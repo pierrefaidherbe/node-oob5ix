@@ -11,14 +11,16 @@ const generatePersonsData = number => {
     persons.push({
       id: number,
       name: faker.name.firstName(),
-      reference: faker.random.number(),
+      reference: faker.datatype.number,
       locale: faker.random.locale(),
-      expirationTime: new Date(faker.date.future()).toUTCString()
+      expirationTime: new Date(faker.date.future()).toISOString()
     });
     number--;
   }
   return persons;
 };
 
-
-fs.writeFileSync('./db.json', JSON.stringify(generatePersonsData(75)));
+fs.writeFileSync(
+  './db.json',
+  JSON.stringify({ partners: generatePersonsData(75) })
+);
